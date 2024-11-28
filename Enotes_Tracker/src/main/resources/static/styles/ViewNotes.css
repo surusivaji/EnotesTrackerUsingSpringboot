@@ -1,0 +1,12 @@
+body {
+	background-image: url("../media/images/image.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+.description {
+	text-align: justify;
+}
+

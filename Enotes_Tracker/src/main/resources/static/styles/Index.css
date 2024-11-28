@@ -1,0 +1,25 @@
+.carousel-item img {
+	filter: brightness(70%);
+}
+
+.carousel-caption {
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 10px;
+	padding: 15px;
+}
+
+.carousel-caption h5 {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+	font-family: 'Arial Black', sans-serif;
+}
+
+.carousel-caption p {
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+	font-size: 1.1rem;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 50%;
+	padding: 10px;
+}
