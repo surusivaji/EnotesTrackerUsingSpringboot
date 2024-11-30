@@ -84,17 +84,17 @@
 <h2 align="center">📷 Screenshots</h2>
 <div align="center">
   <div>
-    <img src="index.png" alt="Index Page" width="60%">
+    <img src="indexpage.png" alt="Index Page" width="60%">
     <p>Index Page</p>
   </div>
 
   <div>
-    <img src="signup.png" alt="Registration" width="60%">
+    <img src="register.png" alt="Registration" width="60%">
     <p>Registration</p>
   </div>
 
   <div>
-    <img src="signin.png" alt="Login" width="60%">
+    <img src="login.png" alt="Login" width="60%">
     <p>Login</p>
   </div>
 
@@ -123,13 +123,19 @@
     <p>View Notes</p>
   </div>
 
+   <div>
+    <img src="readnotes.png" alt="View Notes" width="60%">
+    <p>Read Notes</p>
+  </div>
+
+
   <div>
     <img src="updatenotes.png" alt="Update Notes" width="60%">
     <p>Update Notes</p>
   </div>
 
   <div>
-    <img src="viewprofile.png" alt="View Profile" width="60%">
+    <img src="profile.png" alt="View Profile" width="60%">
     <p>View Profile</p>
   </div>
 
