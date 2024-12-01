@@ -62,8 +62,8 @@
 				<h1 class="text-center text-danger fw-bold">View Notes</h1>
 				<div th:each="note: ${notes}">
 					<div class="card mt-2" style="box-shadow:0 0 2px 2px #B2B2B2;">
-					<div class="card-head text-center fw-bold fs-1 p-1 text-primary">
-						<i class="fa-solid fa-book"></i>
+					<div class="card-head text-center p-1">
+						<img th:src="@{/media/images/notesicon.png}" alt="" height="40px" width="40px" />
 					</div>
 					<div class="card-body p-2">
 						<div>
@@ -80,9 +80,9 @@
 						</div>
 					</div>
 					<div class="card-head d-flex justify-content-center p-2">
-						<a th:href="@{/user/readnotes/{id}(id=${note.id})}" class="btn btn-warning btn-sm me-1">Read</a>
-						<a th:href="@{/user/updatenotes/{id}(id=${note.id})}" class="btn btn-success btn-sm me-1">Edit</a>
-						<a th:href="@{/user/removenotes/{id}(id=${note.id})}" class="btn btn-danger btn-sm me-1">Remove</a>
+						<a th:href="@{/user/readnotes/{id}(id=${note.id})}" class="btn btn-primary btn-sm me-1"><i class="fa-solid fa-book"></i> Read</a>
+						<a th:href="@{/user/updatenotes/{id}(id=${note.id})}" class="btn btn-success btn-sm me-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+						<a th:href="@{/user/removenotes/{id}(id=${note.id})}" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Remove</a>
 					</div>
 				</div>
 				</div>
