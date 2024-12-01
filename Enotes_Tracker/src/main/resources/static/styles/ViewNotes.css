@@ -22,3 +22,26 @@ body {
 #logout {
 	background: #F32424 !important;
 }
+
+#viewnotes-heading {
+	color: #FF0000 !important;
+	font-size: 45px !important; 
+	font-weight: 700 !important;
+	text-shadow: 2px 1px #000;
+	word-spacing: 3px;
+}
+
+#read {
+	background: #7A1CAC !important;
+	border: none;
+}
+
+#edit {
+	background: #347928 !important;
+	border: none;
+}
+
+#remove {
+	background: #F32424 !important;
+	border: none;
+}

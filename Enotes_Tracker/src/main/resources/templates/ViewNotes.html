@@ -20,7 +20,7 @@
 	<!-- navigation bar -->
 	<div class="navbar navbar-expand-xl bg-success navbar-dark p-2">
 		<div class="container-fluid">
-			<a class="navbar-brand d-flex align-items-center" id="heading" th:href="@{/}"><img th:src="@{/media/images/notepad.png}" alt="" height="35px" width="35px"/><span>Enotes tracker</span></a>
+			<a class="navbar-brand d-flex align-items-center" id="heading" th:href="@{/user/home}"><img th:src="@{/media/images/notepad.png}" alt="" height="35px" width="35px"/><span>Enotes tracker</span></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -58,7 +58,7 @@
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-8">
-				<h1 class="text-center text-danger fw-bold">View Notes</h1>
+				<h1 class="text-center text-danger" id="viewnotes-heading">View Notes</h1>
 				<div th:each="note: ${notes}">
 					<div class="card mt-2" style="box-shadow:0 0 2px 2px #B2B2B2;">
 					<div class="card-head text-center p-1">
@@ -79,9 +79,9 @@
 						</div>
 					</div>
 					<div class="card-head d-flex justify-content-center p-2">
-						<a th:href="@{/user/readnotes/{id}(id=${note.id})}" class="btn btn-primary btn-sm me-1"><i class="fa-solid fa-book"></i> Read</a>
-						<a th:href="@{/user/updatenotes/{id}(id=${note.id})}" class="btn btn-success btn-sm me-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-						<a th:href="@{/user/removenotes/{id}(id=${note.id})}" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Remove</a>
+						<a th:href="@{/user/readnotes/{id}(id=${note.id})}" class="btn btn-primary btn-sm me-1" id="read"><i class="fa-solid fa-book"></i> Read</a>
+						<a th:href="@{/user/updatenotes/{id}(id=${note.id})}" class="btn btn-success btn-sm me-1" id="edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+						<a th:href="@{/user/removenotes/{id}(id=${note.id})}" class="btn btn-danger btn-sm me-1" id="remove"><i class="fa-solid fa-trash"></i> Remove</a>
 					</div>
 				</div>
 				</div>
