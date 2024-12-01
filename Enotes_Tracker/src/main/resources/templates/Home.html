@@ -14,14 +14,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<link rel="stylesheet" th:href="@{/styles/Home.css}">
 </head>
 <body>
 	<!-- navigation bar -->
 	<div class="navbar navbar-expand-xl bg-success navbar-dark p-2">
 		<div class="container-fluid">
-			<a class="navbar-brand f-1 fw-bold" th:href="@{/user/home}"><i
-				class="fa-solid fa-book"></i> Enotes Tracker</a>
+			<a class="navbar-brand d-flex align-items-center" id="heading" th:href="@{/}"><img th:src="@{/media/images/notepad.png}" alt="" height="35px" width="35px"/><span>Enotes tracker</span></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -31,18 +30,18 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="list-item"><a th:href="@{/user/home}"
-						class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+						class="nav-link active "><i class="fa-solid fa-house f-3"></i> Home</a></li>
 					<li class="list-item"><a th:href="@{/user/addnotes}"
-						class="nav-link active"><i class="fa-solid fa-plus"></i> Add Notes</a></li>
+						class="nav-link active"><i class="fa-solid fa-plus f-3"></i> Add Notes</a></li>
 					<li class="list-item"><a th:href="@{/user/viewnotes}"
-						class="nav-link active"><i class="fa-solid fa-bars"></i> View Notes</a></li>
+						class="nav-link active"><i class="fa-solid fa-bars f-3"></i> View Notes</a></li>
 				</ul>
 				<ul class="navbar-nav ms-auto">
 					<li class="list-item"><a th:href="@{/user/viewprofile}"
-						class="nav-link active btn btn-primary me-2 mt-1"><i
-							class="fa-solid fa-user"></i> <span th:text="${username}"></span></a></li>
+						class="nav-link active btn btn-primary me-2 mt-10" id="username"><i
+							class="fa-solid fa-user" id="user"></i> <span th:text="${username}"></span></a></li>
 					<li class="list-item"><a th:href="@{/logout}"
-						class="nav-link active btn btn-primary mt-1"><i
+						class="nav-link active btn btn-primary" id="logout"><i
 							class="fa-solid fa-power-off"></i> Logout</a></li>
 				</ul>
 			</div>
@@ -54,31 +53,33 @@
   		<source th:src="@{/media/videos/bgvideo.mp4}" type="video/mp4">
 	</video>  -->
 	
-	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-	  	<div class="carousel-indicators">
-	    	<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-	    	<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-	    	<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-	  	</div>
-	  	<div class="carousel-inner">
-	    	<div class="carousel-item active">
-	      		<img th:src="@{/media/images/background-1.jpg}" class="d-block w-100" height="635px" alt="background-1">
-	    	</div>
-		    <div class="carousel-item">
-		     	<img th:src="@{/media/images/background-2.jpg}" class="d-block w-100" height="635px" alt="background-2">
-		    </div>
-		    <div class="carousel-item">
-		     	<img th:src="@{/media/images/background-3.jpg}" class="d-block w-100" height="635px" alt="background-3">
-		    </div>
-	  	</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-		  	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    <span class="visually-hidden">Previous</span>
-		 </button>
-		 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-		   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		   	<span class="visually-hidden">Next</span>
-		 </button>
+	<div class="container-fluid">
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+		  	<div class="carousel-indicators">
+		    	<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		    	<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		    	<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		  	</div>
+		  	<div class="carousel-inner">
+		    	<div class="carousel-item active">
+		      		<img th:src="@{/media/images/background-1.jpg}" class="d-block w-100 responsive" height="630px" alt="background-1">
+		    	</div>
+			    <div class="carousel-item">
+			     	<img th:src="@{/media/images/background-2.jpg}" class="d-block w-100 responsive" height="630px" alt="background-2">
+			    </div>
+			    <div class="carousel-item">
+			     	<img th:src="@{/media/images/background-3.jpg}" class="d-block w-100 resposive" height="630px" alt="background-3">
+			    </div>
+		  	</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+			  	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Previous</span>
+			 </button>
+			 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+			   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			   	<span class="visually-hidden">Next</span>
+			 </button>
+		</div>
 	</div>
 
 

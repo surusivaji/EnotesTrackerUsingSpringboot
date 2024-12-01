@@ -15,13 +15,24 @@
 	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" th:href="@{/styles/AddNotes.css}"/>
+<style>
+		#heading {
+   			font-size: 25px !important;
+   			font-weight: 600;
+   		}
+   		#username {
+   			background: #162447 !important;
+   		}
+   		#logout {
+   			background: #F32424 !important;
+   		}
+	</style>
 </head>
 <body>
 	<!-- navigation bar -->
 	<div class="navbar navbar-expand-xl bg-success navbar-dark p-2">
 		<div class="container-fluid">
-			<a class="navbar-brand f-1 fw-bold" href="#"><i
-				class="fa-solid fa-book"></i> Enotes Tracker</a>
+			<a class="navbar-brand d-flex align-items-center" id="heading" th:href="@{/}"><img th:src="@{/media/images/notepad.png}" alt="" height="35px" width="35px"/><span>Enotes tracker</span></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -30,19 +41,19 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="list-item"><a th:href="@{/}"
-						class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
-					<li class="list-item"><a th:href="@{/}"
-						class="nav-link active"><i class="fa-solid fa-plus"></i> Add Notes</a></li>
-					<li class="list-item"><a th:href="@{/}"
-						class="nav-link active"><i class="fa-solid fa-bars"></i> View Notes</a></li>
+					<li class="list-item"><a th:href="@{/user/home}"
+						class="nav-link active "><i class="fa-solid fa-house f-3"></i> Home</a></li>
+					<li class="list-item"><a th:href="@{/user/addnotes}"
+						class="nav-link active"><i class="fa-solid fa-plus f-3"></i> Add Notes</a></li>
+					<li class="list-item"><a th:href="@{/user/viewnotes}"
+						class="nav-link active"><i class="fa-solid fa-bars f-3"></i> View Notes</a></li>
 				</ul>
 				<ul class="navbar-nav ms-auto">
 					<li class="list-item"><a th:href="@{/user/viewprofile}"
-						class="nav-link active btn btn-primary me-2 mt-1"><i
-							class="fa-solid fa-user"></i> <span th:text="${username}"></span></a></li>
+						class="nav-link active btn btn-primary me-2 mt-10" id="username"><i
+							class="fa-solid fa-user" id="user"></i> <span th:text="${username}"></span></a></li>
 					<li class="list-item"><a th:href="@{/logout}"
-						class="nav-link active btn btn-primary mt-1"><i
+						class="nav-link active btn btn-primary" id="logout"><i
 							class="fa-solid fa-power-off"></i> Logout</a></li>
 				</ul>
 			</div>

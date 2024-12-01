@@ -4,3 +4,16 @@ body {
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+#heading {
+	font-size: 25px !important;
+	font-weight: 600;
+}
+
+#register {
+	background: #EB5B00 !important;
+}
+
+#login {
+	background: #E4003A !important;
+}

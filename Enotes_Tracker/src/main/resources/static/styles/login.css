@@ -1,6 +1,19 @@
 body {
-    background-image: url('../media/images/image.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+	background-image: url('../media/images/image.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#heading {
+	font-size: 25px !important;
+	font-weight: 600;
+}
+
+#register {
+	background: #EB5B00 !important;
+}
+
+#login {
+	background: #E4003A !important;
 }

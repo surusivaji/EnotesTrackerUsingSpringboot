@@ -1,7 +1,39 @@
 body {
-    background-image: url('../media/images/background.png');
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
+	background-image: url('../media/images/background.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+#profile {
+	color: #FF2929 !important;
+	font-size: 45px !important;
+	font-weight: 900;
+	text-shadow: 2px 1px #000;
+}
+
+#heading {
+	font-size: 25px !important;
+	font-weight: 600;
+}
+
+#username {
+	background: #162447 !important;
+}
+
+#logout {
+	background: #F32424 !important;
+}
+
+#cancel {
+	background: #640D5F !important;
+}
+
+#submitbtn {
+	background: #4C1F7A !important;
+}
+
+#updateprofile {
+	background: #399918 !important;
 }
