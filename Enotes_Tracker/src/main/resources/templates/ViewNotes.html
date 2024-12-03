@@ -20,7 +20,10 @@
 	<!-- navigation bar -->
 	<div class="navbar navbar-expand-xl bg-success navbar-dark p-2">
 		<div class="container-fluid">
-			<a class="navbar-brand d-flex align-items-center" id="heading" th:href="@{/user/home}"><img th:src="@{/media/images/notepad.png}" alt="" height="35px" width="35px"/><span>Enotes tracker</span></a>
+			<a class="navbar-brand d-flex align-items-center" id="heading"
+				th:href="@{/user/home}"><img
+				th:src="@{/media/images/notepad.png}" alt="" height="35px"
+				width="35px" /><span>Enotes tracker</span></a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -30,16 +33,20 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="list-item"><a th:href="@{/user/home}"
-						class="nav-link active "><i class="fa-solid fa-house f-3"></i> Home</a></li>
+						class="nav-link active "><i class="fa-solid fa-house f-3"></i>
+							Home</a></li>
 					<li class="list-item"><a th:href="@{/user/addnotes}"
-						class="nav-link active"><i class="fa-solid fa-plus f-3"></i> Add Notes</a></li>
+						class="nav-link active"><i class="fa-solid fa-plus f-3"></i>
+							Add Notes</a></li>
 					<li class="list-item"><a th:href="@{/user/viewnotes}"
-						class="nav-link active"><i class="fa-solid fa-bars f-3"></i> View Notes</a></li>
+						class="nav-link active"><i class="fa-solid fa-bars f-3"></i>
+							View Notes</a></li>
 				</ul>
 				<ul class="navbar-nav ms-auto">
 					<li class="list-item"><a th:href="@{/user/viewprofile}"
 						class="nav-link active btn btn-primary me-2 mt-10" id="username"><i
-							class="fa-solid fa-user" id="user"></i> <span th:text="${username}"></span></a></li>
+							class="fa-solid fa-user" id="user"></i> <span
+							th:text="${username}"></span></a></li>
 					<li class="list-item"><a th:href="@{/logout}"
 						class="nav-link active btn btn-primary" id="logout"><i
 							class="fa-solid fa-power-off"></i> Logout</a></li>
@@ -47,7 +54,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- alert message -->
 	<div class="alert alert-success" th:if="${session.msg}">
 		<p class="text-center text-primary">[[${session.msg}]]...!!!</p>
@@ -57,34 +64,54 @@
 	<!-- view notes -->
 	<div class="container">
 		<div class="row d-flex justify-content-center">
-			<div class="col-md-8">
-				<h1 class="text-center text-danger" id="viewnotes-heading">View Notes</h1>
-				<div th:each="note: ${notes}">
-					<div class="card mt-2" style="box-shadow:0 0 2px 2px #B2B2B2;">
-					<div class="card-head text-center p-1">
-						<img th:src="@{/media/images/notesicon.png}" alt="" height="40px" width="40px" />
-					</div>
-					<div class="card-body p-2">
-						<div>
-							<span class="text-danger fw-bold">Title: </span>
-							<span th:text="${note.title}"></span>
+			<div class="col-md-10">
+				<h1 class="text-center text-danger" id="viewnotes-heading">View All Notes</h1>
+				<div th:each="note: ${notesList}">
+					<div class="card mt-2" style="box-shadow: 0 0 2px 2px #B2B2B2;">
+						<div class="card-head text-center p-1">
+							<img th:src="@{/media/images/notesicon.png}" alt="" height="40px" width="40px" />
 						</div>
-						<div>
-							<span class="text-danger fw-bold">Description: </span>
-							<span class="description" th:text="${note.description}"></span>
+						<div class="card-body p-2">
+							<div>
+								<span class="text-danger fw-bold">Title: </span> 
+								<span th:text="${note.title}"></span>
+							</div>
+							<div>
+								<span class="text-danger fw-bold">Description: </span> 
+								<span class="description" th:text="${note.description}"></span>
+							</div>
+							<div>
+								<span class="text-danger fw-bold">Date: </span> <span
+									th:text="${note.date}"></span>
+							</div>
 						</div>
-						<div>
-							<span class="text-danger fw-bold">Date: </span>
-							<span  th:text="${note.date}"></span>
+						<div class="card-head d-flex justify-content-center p-2">
+							<a th:href="@{/user/readnotes/{id}(id=${note.id})}"
+								class="btn btn-primary btn-sm me-1" id="read"><i
+								class="fa-solid fa-book"></i> Read</a> <a
+								th:href="@{/user/updatenotes/{id}(id=${note.id})}"
+								class="btn btn-success btn-sm me-1" id="edit"><i
+								class="fa-solid fa-pen-to-square"></i> Edit</a> <a
+								th:href="@{/user/removenotes/{id}(id=${note.id})}"
+								class="btn btn-danger btn-sm me-1" id="remove"><i
+								class="fa-solid fa-trash"></i> Remove</a>
 						</div>
-					</div>
-					<div class="card-head d-flex justify-content-center p-2">
-						<a th:href="@{/user/readnotes/{id}(id=${note.id})}" class="btn btn-primary btn-sm me-1" id="read"><i class="fa-solid fa-book"></i> Read</a>
-						<a th:href="@{/user/updatenotes/{id}(id=${note.id})}" class="btn btn-success btn-sm me-1" id="edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-						<a th:href="@{/user/removenotes/{id}(id=${note.id})}" class="btn btn-danger btn-sm me-1" id="remove"><i class="fa-solid fa-trash"></i> Remove</a>
 					</div>
 				</div>
-				</div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-md-4 offset-md-1 text-right p-3">
+				<p class="fw-bold">Total Notes : [[${totalElements}]]</p>
+			</div>
+			<div class="col-md-5">
+				<nav aria-label="Page navigation example mt-3" class="center">
+					<ul class="pagination">
+						<li class="page-item" th:if="${currentPage!=0}"><a class="page-link" th:href="@{'/user/viewnotes?pageNo='+${currentPage-1}}">Previous</a></li>
+						<li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage==i-1 ? 'active': ''}"><a class="page-link" th:href="@{'/user/viewnotes?pageNo='+${i-1}}">[[${i}]]</a></li>
+						<li class="page-item" th:if="${currentPage!=totalPages}"><a class="page-link" th:href="@{'/user/viewnotes?pageNo='+${currentPage+1}}">Next</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>

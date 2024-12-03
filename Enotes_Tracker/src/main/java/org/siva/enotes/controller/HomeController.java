@@ -2,6 +2,7 @@ package org.siva.enotes.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 import org.siva.enotes.model.Notes;
@@ -9,12 +10,14 @@ import org.siva.enotes.model.User;
 import org.siva.enotes.service.INotesService;
 import org.siva.enotes.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
@@ -129,12 +132,15 @@ public class HomeController {
 	}
 	
 	@GetMapping("/user/viewnotes")
-	public String vieewNotes(HttpSession session, Model model) {
+	public String vieewNotes(HttpSession session, Model model, @RequestParam(defaultValue = "0") int pageNo) {
 		User user = (User) session.getAttribute("user");
 		if (user!=null) {
 			model.addAttribute("username", user.getFullname());
-			List<Notes> allNotes = notesService.findAllNotes(user);
-			model.addAttribute("notes", allNotes);
+			Page<Notes> notes = notesService.findAllNotes(user, pageNo);
+			model.addAttribute("currentPage", pageNo);
+			model.addAttribute("totalElements", notes.getTotalElements());
+			model.addAttribute("totalPages", notes.getTotalPages()); 
+			model.addAttribute("notesList", notes.getContent());
 			return "ViewNotes";
 		}
 		return "redirect:/login";
