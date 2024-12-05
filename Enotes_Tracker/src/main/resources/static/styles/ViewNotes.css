@@ -6,8 +6,8 @@ body {
 	background-attachment: fixed;
 }
 
-.description {
-	text-align: justify;
+#description {
+	text-align: center;
 }
 
 #heading {
