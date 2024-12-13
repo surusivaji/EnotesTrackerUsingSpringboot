@@ -58,27 +58,42 @@
 		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
 	</div>
 	
-	<!-- add notes form -->
+	<div class="alert alert-success" th:if="${session.logout}">
+		<p class="text-center text-primary">[[${session.msg}]]...!!!</p>
+		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+	</div>
+	
+	<!-- add todo form -->
 	<div class="container">
 		<div class="row d-flex justify-content-center mt-5">
 			<div class="col-md-10">
 				<div class="card" style="box-shadow:0 0 2px 2px #B2B2B2;">
 					<div class="card-head text-center bg-success p-3 text-light fw-bold">
-						<h3>Add Notes</h3>
+						<h3>Edit Todo</h3>
 					</div>
 					<div class="card-body">
-						<form th:action="@{/user/savenotes}" method="post" id="myForm">
+						<form th:action="@{/user/updateTodoInformation}" method="post" id="myForm">
+							<input type="text" name="id" id="id" th:value="${todo.id}" hidden="true" class="form-control">
 							<div class="form-group mt-2">
 								<label for="title">Title </label><span class="text-danger">*</span>
-								<input type="text" name="title" id="title" class="form-control">
+								<input type="text" name="title" id="title" th:value="${todo.title}" class="form-control">
 							</div>
 							<div class="form-group mt-2">
-								<label for="description">Description </label><span class="text-danger">*</span>
-								<textarea rows="10" cols="" class="form-control" id="description" name="description">
+								<label for="description">Description</label><span class="text-danger">*</span>
+								<textarea rows="7" cols="" class="form-control" th:text="${todo.description}" id="description" name="description">
+									 
 								</textarea>
 							</div>
+							<div class="form-group mt-2">
+							    <label for="status">Status</label>
+							    <select name="status" id="status" class="form-control">
+							        <option value="Complete" th:selected="${todo.status == 'Complete'}">Complete</option>
+							        <option value="Incomplete" th:selected="${todo.status == 'Incomplete'}">Incomplete</option>
+							    </select>
+							</div>
+
 							<div class="form-group mt-3">
-								<input type="submit" value="SAVE NOTES" id="submitbtn" class="btn btn-primary fw-bold">
+								<input type="submit" value="UPDATE TODO" id="submitbtn" class="btn btn-primary fw-bold">
 							</div>
 						</form>
 					</div>
@@ -93,7 +108,7 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 		
-	<script th:src="@{/js/AddNotes.js}"></script>
+	<script th:src="@{/js/AddTodo.js}"></script>
 	
 </body>
 </html>

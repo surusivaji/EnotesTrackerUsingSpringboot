@@ -2,12 +2,12 @@ package org.siva.enotes.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
 
 import org.siva.enotes.model.Notes;
+import org.siva.enotes.model.Todo;
 import org.siva.enotes.model.User;
 import org.siva.enotes.service.INotesService;
+import org.siva.enotes.service.ITodoService;
 import org.siva.enotes.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
 	private INotesService notesService;
+	
+	@Autowired
+	private ITodoService todoService;
 	
 	@GetMapping("/")
 	public String indexPage() {
@@ -137,11 +139,16 @@ public class HomeController {
 		if (user!=null) {
 			model.addAttribute("username", user.getFullname());
 			Page<Notes> notes = notesService.findAllNotes(user, pageNo);
-			model.addAttribute("currentPage", pageNo);
-			model.addAttribute("totalElements", notes.getTotalElements());
-			model.addAttribute("totalPages", notes.getTotalPages()); 
-			model.addAttribute("notesList", notes.getContent());
-			return "ViewNotes";
+			if (notes!=null) {
+				model.addAttribute("currentPage", pageNo);
+				model.addAttribute("totalElements", notes.getTotalElements());
+				model.addAttribute("totalPages", notes.getTotalPages()); 
+				model.addAttribute("notesList", notes.getContent());
+				return "ViewNotes";
+			}
+			else {
+				return "redirect:/user/home";
+			}
 		}
 		return "redirect:/login";
 	}
@@ -220,6 +227,140 @@ public class HomeController {
 		}
 	}
 	
+	@GetMapping("/user/addtodo")
+	public String addTodo(HttpSession session, Model model) {
+		User user = (User) session.getAttribute("user");
+		if (user!=null) {
+			model.addAttribute("username", user.getFullname());
+			return "AddTodo";
+		}
+		else {
+			return "redirect:/login";
+		}
+	}
+	
+	@PostMapping("/user/savetodo")
+	public String saveTodo(Model model, @RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("status") String status, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user!=null) {
+			model.addAttribute("username", user.getFullname());
+			Todo todo = new Todo();
+			todo.setTitle(title);
+			todo.setDescription(description);
+			todo.setStatus(status);
+			todo.setDate(Date.valueOf(LocalDate.now()));
+			todo.setUser(user);
+			Todo save = todoService.addTodo(todo);
+			if (save!=null) {
+				session.setAttribute("msg", "todo added successfully");
+				return "redirect:/user/addtodo";
+			}
+			else {
+				session.setAttribute("logout", "something went wrong on the server");
+				return "redirect:/user/addtodo";
+			}
+			
+		}
+		else {
+			return "redirect:/login";
+		}
+	}
+	
+	@GetMapping("/user/viewtodos")
+	public String viewTodo(HttpSession session, Model model, @RequestParam(defaultValue = "0") int pageNo) {
+		User user = (User) session.getAttribute("user");
+		if (user!=null) {
+			model.addAttribute("username", user.getFullname());
+			Page<Todo> pages = todoService.getAllTodosByUser(user, pageNo);
+			if (pages!=null) {
+				model.addAttribute("currentPage", pageNo);
+				model.addAttribute("totalElements", pages.getTotalElements());
+				model.addAttribute("totalPages", pages.getTotalPages());
+				model.addAttribute("todos", pages.getContent());
+				return "ViewTodos";
+			}
+			else {
+				return "redirect:/user/home";
+			}
+		}
+		else {
+			return "redirect:/login";
+		}
+	}
+	
+	@GetMapping("/user/updatetodo/{id}")
+	public String updateTodo(HttpSession session, Model model, @PathVariable("id") int id) {
+		User user = (User) session.getAttribute("user");
+		if (user!=null) {
+			model.addAttribute("username", user.getFullname());
+			Todo todo = todoService.getTodoById(id);
+			if (todo!=null) {
+				model.addAttribute("todo", todo);
+				return "UpdateTodo";
+			}
+			else {
+				session.setAttribute("logout", "something went wrong on server please check the todo details");
+				return "redirect:/user/viewtodos";
+			}
+		} 
+		else {
+			return "redirect:/login";
+		}
+	}
+	
+	@PostMapping("/user/updateTodoInformation")
+	public String updateTodoInformation(HttpSession session, @ModelAttribute Todo todo) {
+		User user = (User) session.getAttribute("user");
+		if (user!=null) {
+			todo.setDate(Date.valueOf(LocalDate.now()));
+			todo.setUser(user);
+			Todo update = todoService.addTodo(todo);
+			if (update!=null) {
+				session.setAttribute("msg", "todo updated successfully");
+				return "redirect:/user/viewtodos";
+			} 
+			else {
+				session.setAttribute("logout", "something went wrong on the server");
+				return "redirect:/user/viewtodos";
+			}
+		} 
+		else {
+			return "redirect:/login";
+		}
+	}
+	
+	@GetMapping("/user/readtodo/{id}")
+	public String readTodo(HttpSession session, @PathVariable("id") int id, Model model) {
+		User user = (User) session.getAttribute("user");
+		if (user!=null) {
+			model.addAttribute("username", user.getFullname());
+			Todo todo = todoService.getTodoById(id);
+			if (todo!=null) {
+				model.addAttribute("todo", todo);
+				return "ReadTodo";
+			}
+			else {
+				return "redirect:/user/viewtodos";
+			}
+		}
+		else {
+			return "redirect:/login";
+		}
+	}
+	
+	@GetMapping("/user/removetodo/{id}")
+	public String removeTodo(HttpSession session, @PathVariable("id") int id) {
+		User user = (User) session.getAttribute("user");
+		if (user!=null) {
+			todoService.removeTodoById(id);
+			session.setAttribute("logout", "todo removed successfully");
+			return "redirect:/user/viewtodos";
+		}
+		else {
+			return "redirect:/login";
+		}
+	}
+	
 	@GetMapping("/user/viewprofile")
 	public String viewProfile(HttpSession session, Model model) {
 		User user = (User) session.getAttribute("user");
@@ -264,6 +405,7 @@ public class HomeController {
 		User user = userService.findById(id);
 		if (user!=null) {
 			notesService.removeNotesByUser(user);
+			todoService.removeTodosByUser(user);
 			boolean deleteUser = userService.deleteUser(user);
 			if (deleteUser) {
 				session.setAttribute("logout", "your account permunantly deleted");

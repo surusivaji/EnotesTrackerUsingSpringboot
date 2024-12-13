@@ -47,6 +47,10 @@
 						class="nav-link active"><i class="fa-solid fa-plus f-3"></i> Add Notes</a></li>
 					<li class="list-item"><a th:href="@{/user/viewnotes}"
 						class="nav-link active"><i class="fa-solid fa-bars f-3"></i> View Notes</a></li>
+					<li class="list-item"><a th:href="@{/user/addtodo}"
+						class="nav-link active"><i class="fa-regular fa-calendar-check f-3"></i> Add Todos</a></li>
+					<li class="list-item"><a th:href="@{/user/viewtodos}"
+						class="nav-link active"><i class="fa-solid fa-display f-3"></i> Display Todos</a></li>
 				</ul>
 				<ul class="navbar-nav ms-auto">
 					<li class="list-item"><a th:href="@{/user/viewprofile}"
@@ -88,7 +92,7 @@
 							</div>
 							<div class="form-group mt-3 text-center">
 								<a th:href="@{/user/viewnotes}" class="btn btn-primary">Back</a>
-								<a th:href="@{/user/updatenotes/{id}(id=${entry.id})}" class="btn btn-success me-1">Edit</a>
+								<a th:href="@{/user/updatenotes/{id}(id=${entry.id})}" class="btn btn-success me-1">Edit NOTES</a>
 							</div>
 					</div>
 				</div>

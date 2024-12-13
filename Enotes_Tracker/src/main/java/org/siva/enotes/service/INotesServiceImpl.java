@@ -27,9 +27,13 @@ public class INotesServiceImpl implements INotesService {
 	
 	@Override
 	public Page<Notes> findAllNotes(User user, int pageNo) {
-		Pageable pageable = PageRequest.of(pageNo, 2, Sort.by(Sort.Direction.DESC, "id"));
-		Page<Notes> list = notesRepository.findByUser(user, pageable);
-		return list;
+		try {
+			Pageable pageable = PageRequest.of(pageNo, 2, Sort.by(Sort.Direction.DESC, "id"));
+			Page<Notes> list = notesRepository.findByUser(user, pageable);
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	@Override

@@ -61,7 +61,12 @@
 
 	<!-- alert message -->
 	<div class="alert alert-success" th:if="${session.msg}">
-		<p class="text-center text-primary">[[${session.msg}]]...!!!</p>
+		<p class="text-center text-success">[[${session.msg}]]...!!!</p>
+		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+	</div>
+	
+	<div class="alert alert-danger" th:if="${session.logout}">
+		<p class="text-center text-danger">[[${session.logout}]]...!!!</p>
 		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
 	</div>
 
@@ -69,34 +74,38 @@
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-10">
-				<h1 class="text-center text-danger" id="viewnotes-heading">DISPLAY ALL NOTES</h1>
-				<div th:each="note: ${notesList}">
+				<h1 class="text-center text-danger" id="viewnotes-heading">DISPLAY ALL TODOS</h1>
+				<div th:each="todo : ${todos}">
 					<div class="card mt-2" style="box-shadow: 0 0 2px 2px #B2B2B2;">
 						<div class="card-head text-center p-1">
-							<img th:src="@{/media/images/notesicon.png}" alt="" height="40px" width="40px" />
+							<img th:src="@{/media/images/todo.png}" alt="" height="40px" width="40px" />
 						</div>
 						<div class="card-body p-2">
 							<div>
 								<span class="text-danger fw-bold">Title: </span> 
-								<span th:text="${note.title}"></span>
+								<span th:text="${todo.title}"></span>
 							</div>
 							<div>
 								<span class="text-danger fw-bold">Description: </span> 
-								<span class="description" th:text="${note.description}" id="description"></span>
+								<span class="description" th:text="${todo.description}" id="description"></span>
 							</div>
 							<div>
-								<span class="text-danger fw-bold">Date: </span> <span
-									th:text="${note.date}"></span>
+								<span class="text-danger fw-bold">Status: </span> 
+								<span th:text="${todo.status}" class="text-bold text-primary"></span>
+							</div>
+							<div>
+								<span class="text-danger fw-bold">Date: </span> 
+								<span th:text="${todo.date}"></span>
 							</div>
 						</div>
 						<div class="card-head d-flex justify-content-center p-2">
-							<a th:href="@{/user/readnotes/{id}(id=${note.id})}"
+							<a th:href="@{/user/readtodo/{id}(id=${todo.id})}"
 								class="btn btn-primary btn-sm me-1" id="read"><i
 								class="fa-solid fa-book"></i> Read</a> <a
-								th:href="@{/user/updatenotes/{id}(id=${note.id})}"
+								th:href="@{/user/updatetodo/{id}(id=${todo.id})}"
 								class="btn btn-success btn-sm me-1" id="edit"><i
 								class="fa-solid fa-pen-to-square"></i> Edit</a> <a
-								th:href="@{/user/removenotes/{id}(id=${note.id})}"
+								th:href="@{/user/removetodo/{id}(id=${todo.id})}"
 								class="btn btn-danger btn-sm me-1" id="remove"><i
 								class="fa-solid fa-trash"></i> Remove</a>
 						</div>
@@ -111,13 +120,13 @@
 			<div class="col-md-5">
 				<nav aria-label="Page navigation example mt-3" class="center">
 					<ul class="pagination">
-						<li class="page-item" th:if="${currentPage!=0}"><a class="page-link" th:href="@{'/user/viewnotes?pageNo='+${currentPage-1}}">Previous</a></li>
-						<li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage==i-1 ? 'active': ''}"><a class="page-link" th:href="@{'/user/viewnotes?pageNo='+${i-1}}">[[${i}]]</a></li>
-						<li class="page-item" th:if="${currentPage!=totalPages}"><a class="page-link" th:href="@{'/user/viewnotes?pageNo='+${currentPage+1}}">Next</a></li>
+						<li class="page-item" th:if="${currentPage!=0}"><a class="page-link" th:href="@{'/user/viewtodos?pageNo='+${currentPage-1}}">Previous</a></li>
+						<li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage==i-1 ? 'active': ''}"><a class="page-link" th:href="@{'/user/viewtodos?pageNo='+${i-1}}">[[${i}]]</a></li>
+						<li class="page-item" th:if="${currentPage!=totalPages}"><a class="page-link" th:href="@{'/user/viewtodos?pageNo='+${currentPage+1}}">Next</a></li>
 					</ul>
 				</nav>
 			</div>
-		</div>
+		</div> 
 	</div>
 
 	<script

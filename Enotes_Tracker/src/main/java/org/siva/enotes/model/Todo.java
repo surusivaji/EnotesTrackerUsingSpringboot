@@ -10,28 +10,32 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Notes {
-	
+public class Todo {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
 	private Integer id;
-	@Column(name="title", nullable=false)
+	@Column(name = "Title", length = 100, nullable = false)
 	private String title;
-	@Column(name="description", nullable=false, length=2000)
+	@Column(name = "Description", length = 500, nullable = false)
 	private String description;
-	@Column(name="entry_date", nullable=false)
+	@Column(name = "Status", length = 50, nullable = false)
+	private String status;
+	@Column(name = "Date", length = 50, nullable = false)
 	private Date date;
 	@ManyToOne
 	private User user;
-	
-	public Notes() {
-		
+
+	public Todo() {
+
 	}
 
-	public Notes(int id, String title, String description, Date date, User user) {
+	public Todo(int id, String title, String description, String status, Date date, User user) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
+		this.status = status;
 		this.date = date;
 		this.user = user;
 	}
@@ -60,6 +64,14 @@ public class Notes {
 		this.description = description;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Date getDate() {
 		return date;
 	}
@@ -76,10 +88,4 @@ public class Notes {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "Notes [id=" + id + ", title=" + title + ", description=" + description + ", date=" + date + ", user="
-				+ user + "]";
-	}
-	
 }
