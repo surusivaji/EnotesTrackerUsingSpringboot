@@ -67,6 +67,17 @@
 						<h2 id="profile">Profile</h2>
 					</div>
 					<div class="card-body">
+					
+						<!-- alert messages -->
+						<div class="alert alert-success" th:if="${session.successMsg}">
+							<p class="text-center">[[${session.successMsg}]]😊😊😊</p>
+							<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+						</div>
+						<div class="alert alert-danger" th:if="${session.failMsg}">
+							<p class="text-center text-primary">[[${session.failMsg}]]😡😡😡</p>
+							<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+						</div>
+							
 							<div class="row d-flex jusify-content-around">
 								<div class="col-md-6">
 									<div class="form-group mb-2">

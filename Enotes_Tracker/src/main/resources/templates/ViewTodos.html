@@ -58,17 +58,16 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- alert message -->
-	<div class="alert alert-success" th:if="${session.msg}">
-		<p class="text-center text-success">[[${session.msg}]]...!!!</p>
-		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
-	</div>
 	
-	<div class="alert alert-danger" th:if="${session.logout}">
-		<p class="text-center text-danger">[[${session.logout}]]...!!!</p>
+	<!-- alert messages -->
+	<div class="alert alert-success" th:if="${session.successMsg}">
+		<p class="text-center">[[${session.successMsg}]]😊😊😊</p>
 		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
 	</div>
+	<div class="alert alert-danger" th:if="${session.failMsg}">
+		<p class="text-center text-primary">[[${session.failMsg}]]😡😡😡</p>
+		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+	</div>	
 
 	<!-- view notes -->
 	<div class="container">

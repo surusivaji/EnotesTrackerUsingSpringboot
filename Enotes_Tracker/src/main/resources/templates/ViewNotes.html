@@ -58,18 +58,22 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- alert message -->
-	<div class="alert alert-success" th:if="${session.msg}">
-		<p class="text-center text-primary">[[${session.msg}]]...!!!</p>
+	
+	<!-- alert messages -->
+	<div class="alert alert-success" th:if="${session.successMsg}">
+		<p class="text-center">[[${session.successMsg}]]😊😊😊</p>
 		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
 	</div>
+	<div class="alert alert-danger" th:if="${session.failMsg}">
+		<p class="text-center text-primary">[[${session.failMsg}]]😡😡😡</p>
+		<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+	</div>	
 
 	<!-- view notes -->
 	<div class="container">
 		<div class="row d-flex justify-content-center">
-			<div class="col-md-10">
-				<h1 class="text-center text-danger" id="viewnotes-heading">DISPLAY ALL NOTES</h1>
+			<div class="col-md-10 col-sm-12 col-lg-10">
+				<h1 class="text-center text-danger" id="viewnotes-heading">DISPLAY ALL NOTES</h1>		
 				<div th:each="note: ${notesList}">
 					<div class="card mt-2" style="box-shadow: 0 0 2px 2px #B2B2B2;">
 						<div class="card-head text-center p-1">

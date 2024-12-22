@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +27,8 @@ public class INotesServiceImpl implements INotesService {
 	@Override
 	public Page<Notes> findAllNotes(User user, int pageNo) {
 		try {
-			Pageable pageable = PageRequest.of(pageNo, 2, Sort.by(Sort.Direction.DESC, "id"));
+			//Pageable pageable = PageRequest.of(pageNo, 2, Sort.by(Sort.Direction.DESC, "id"));
+			Pageable pageable = PageRequest.of(pageNo, 2);
 			Page<Notes> list = notesRepository.findByUser(user, pageable);
 			return list;
 		} catch (Exception e) {

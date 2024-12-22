@@ -110,6 +110,8 @@ public class IUserServiceImpl implements IUserService {
 		HttpSession session = ((ServletRequestAttributes)(RequestContextHolder.getRequestAttributes())).getRequest().getSession();
 		session.removeAttribute("msg");
 		session.removeAttribute("logout");
+		session.removeAttribute("successMsg");
+		session.removeAttribute("failMsg");
 	}
 	
 

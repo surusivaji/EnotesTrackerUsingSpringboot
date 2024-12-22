@@ -65,13 +65,24 @@
 	
 	<!-- add todo form -->
 	<div class="container">
-		<div class="row d-flex justify-content-center mt-5">
+		<div class="row d-flex justify-content-center mt-4">
 			<div class="col-md-10">
 				<div class="card" style="box-shadow:0 0 2px 2px #B2B2B2;">
 					<div class="card-head text-center bg-success p-3 text-light fw-bold">
 						<h3>Add Todo</h3>
 					</div>
 					<div class="card-body">
+					
+						<!-- alert messages -->
+						<div class="alert alert-success" th:if="${session.successMsg}">
+							<p class="text-center">[[${session.successMsg}]]😊😊😊</p>
+							<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+						</div>
+						<div class="alert alert-danger" th:if="${session.failMsg}">
+							<p class="text-center text-primary">[[${session.failMsg}]]😡😡😡</p>
+							<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+						</div>	
+					
 						<form th:action="@{/user/savetodo}" method="post" id="myForm">
 							<div class="form-group mt-2">
 								<label for="title">Title </label><span class="text-danger">*</span>

@@ -15,18 +15,6 @@
 	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" th:href="@{/styles/login.css}"/>
-<style type="text/css">
-   		#heading {
-   			font-size: 25px !important;
-   			font-weight: 600;
-   		}
-   		#register {
-   			background: #EB5B00 !important;
-   		}
-   		#login {
-   			background: #E4003A !important;
-   		}
-   	</style>
 </head>
 <body>
 	<!-- Navigation Bar -->
@@ -58,11 +46,6 @@
 			 <p class="text-center text-success">[[${session.msg}]]...!!!</p>
 			  <th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
 		</div>
-		
-		<div class="alert alert-danger" th:if="${session.logout}">
-			<p class="text-center text-danger">[[${session.logout}]]...!!!</p>
-			<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
-		</div>
 	
 	<div class="container">
 		<div class="row d-flex justify-content-center mt-5">
@@ -72,6 +55,21 @@
 						<h3>Sign in</h3>
 					</div>
 					<div class="card-body">
+					
+						<!-- alert message  -->
+						<div class="alert alert-success" th:if="${session.successMsg}">
+							<p class="text-center">[[${session.successMsg}]]😊😊😊</p>
+							<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+						</div>
+						<div class="alert alert-danger" th:if="${session.failMsg}">
+							<p class="text-center">[[${session.failMsg}]]😡😡😡</p>
+							<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+						</div>
+						<div class="alert alert-warning" th:if="${session.logout}">
+							<p class="text-center">[[${session.logout}]]☠️☠️☠️</p>
+							<th:block th:text="${@IUserServiceImpl.removeSessionMessage()}"></th:block>
+						</div>
+					
 						<form th:action="@{/loginInformation}" method="post" id="myForm">
 							<div class="form-group mt-2">
 								<label for="email">Email </label><span class="text-danger">*</span>

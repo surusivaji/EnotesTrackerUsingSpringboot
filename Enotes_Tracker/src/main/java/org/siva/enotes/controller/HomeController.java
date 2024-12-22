@@ -49,21 +49,21 @@ public class HomeController {
 		boolean emailIsPresent = userService.emailIsPresent(user.getEmail());
 		boolean mobileIsPresent = userService.mobileIsPresent(user.getMobile());
 		if (emailIsPresent && mobileIsPresent) {
-			session.setAttribute("msg", "email id and mobile number already exists");
+			session.setAttribute("failMsg", "email id and mobile number already exists");
 		}
 		else if (emailIsPresent) {
-			session.setAttribute("msg", "email id already exists");
+			session.setAttribute("failMsg", "email id already exists");
 		}
 		else if (mobileIsPresent) {
-			session.setAttribute("msg", "mobile number is already exists");
+			session.setAttribute("failMsg", "mobile number is already exists");
 		}
 		else {
 			User save = userService.addUser(user);
 			if (save!=null) {
-				session.setAttribute("msg", "congrats, registration successfully completed");
+				session.setAttribute("successMsg", "congrats, registration successfully completed");
 			}
 			else {
-				session.setAttribute("msg", "something went wrong on the server");
+				session.setAttribute("successMsg", "something went wrong on the server");
 			}
 		}
 		return "redirect:/register";
@@ -82,7 +82,7 @@ public class HomeController {
 			return "redirect:/user/home";
 		}
 		else {
-			session.setAttribute("msg", "invalid credientials");
+			session.setAttribute("failMsg", "Invalid Credentials");
 			return "redirect:/login";
 		}
 	}
@@ -120,11 +120,11 @@ public class HomeController {
 			notes.setUser(user);
 			Notes saveNotes = notesService.saveNotes(notes);
 			if (saveNotes!=null) {
-				session.setAttribute("msg", "notes added successfully");
+				session.setAttribute("successMsg", "notes added successfully");
 				return "redirect:/user/addnotes";
 			}
 			else {
-				session.setAttribute("msg", "something went wrong on the server");
+				session.setAttribute("failMsg", "something went wrong on the server");
 				return "redirect:/user/addnotes";
 			}
 		}
@@ -164,7 +164,7 @@ public class HomeController {
 				return "Readnotes";
 			}
 			else {
-				session.setAttribute("msg", "id not exist");
+				session.setAttribute("failMsg", "id not exist");
 				return "redirect:/user/viewnotes";
 			}
 		}
@@ -184,7 +184,7 @@ public class HomeController {
 				return "UpdateNotes";
 			}
 			else {
-				session.setAttribute("msg", "id not exist");
+				session.setAttribute("failMsg", "id not exist");
 				return "redirect:/user/viewnotes";
 			}
 		}
@@ -201,11 +201,11 @@ public class HomeController {
 			notes.setUser(user);
 			Notes updateNotes = notesService.saveNotes(notes);
 			if (updateNotes!=null) {
-				session.setAttribute("msg", "notes updated successfully");
+				session.setAttribute("successMsg", "notes updated successfully");
 				return "redirect:/user/viewnotes";
 			}
 			else {
-				session.setAttribute("msg", "something went wrong on the server");
+				session.setAttribute("failMsg", "something went wrong on the server");
 				return "redirect:/user/viewnotes";
 			}
 		}
@@ -219,7 +219,7 @@ public class HomeController {
 		User user = (User) session.getAttribute("user");
 		if (user!=null) {
 			notesService.removeNotes(id);
-			session.setAttribute("msg", "notes removed successfully");
+			session.setAttribute("successMsg", "notes removed successfully");
 			return "redirect:/user/viewnotes";
 		}
 		else {
@@ -252,11 +252,11 @@ public class HomeController {
 			todo.setUser(user);
 			Todo save = todoService.addTodo(todo);
 			if (save!=null) {
-				session.setAttribute("msg", "todo added successfully");
+				session.setAttribute("successMsg", "todo added successfully");
 				return "redirect:/user/addtodo";
 			}
 			else {
-				session.setAttribute("logout", "something went wrong on the server");
+				session.setAttribute("failMsg", "something went wrong on the server");
 				return "redirect:/user/addtodo";
 			}
 			
@@ -299,7 +299,7 @@ public class HomeController {
 				return "UpdateTodo";
 			}
 			else {
-				session.setAttribute("logout", "something went wrong on server please check the todo details");
+				session.setAttribute("failMsg", "something went wrong on server please check the todo details");
 				return "redirect:/user/viewtodos";
 			}
 		} 
@@ -316,11 +316,11 @@ public class HomeController {
 			todo.setUser(user);
 			Todo update = todoService.addTodo(todo);
 			if (update!=null) {
-				session.setAttribute("msg", "todo updated successfully");
+				session.setAttribute("successMsg", "todo updated successfully");
 				return "redirect:/user/viewtodos";
 			} 
 			else {
-				session.setAttribute("logout", "something went wrong on the server");
+				session.setAttribute("failMsg", "something went wrong on the server");
 				return "redirect:/user/viewtodos";
 			}
 		} 
@@ -353,7 +353,7 @@ public class HomeController {
 		User user = (User) session.getAttribute("user");
 		if (user!=null) {
 			todoService.removeTodoById(id);
-			session.setAttribute("logout", "todo removed successfully");
+			session.setAttribute("successMsg", "todo removed successfully");
 			return "redirect:/user/viewtodos";
 		}
 		else {
@@ -381,7 +381,7 @@ public class HomeController {
 			return "UpdateProfile";
 		}
 		else {
-			session.setAttribute("msg", "something went wrong on the server");
+			session.setAttribute("failMsg", "something went wrong on the server");
 			return "redirect:/user/viewprofile";
 		}
 	}
@@ -391,11 +391,11 @@ public class HomeController {
 		User update = userService.addUser(user);
 		if (update!=null) {
 			session.setAttribute("user", update);
-			session.setAttribute("msg", "user information updated successfully");
+			session.setAttribute("successMsg", "user information updated successfully");
 			return "redirect:/user/viewprofile";
 		}
 		else {
-			session.setAttribute("msg", "something went wrong on the server");
+			session.setAttribute("failMsg", "something went wrong on the server");
 			return "redirect:/user/viewprofile";
 		}
 	}
@@ -408,15 +408,15 @@ public class HomeController {
 			todoService.removeTodosByUser(user);
 			boolean deleteUser = userService.deleteUser(user);
 			if (deleteUser) {
-				session.setAttribute("logout", "your account permunantly deleted");
+				session.setAttribute("successMsg", "your account permunantly deleted");
 				return "redirect:/login";
 			}
 			else {
-				session.setAttribute("msg", "something went wrong on the server");
+				session.setAttribute("failMsg", "something went wrong on the server");
 				return "redirect:/user/viewprofile";
 			}
 		} else {
-			session.setAttribute("msg", "userid not found");
+			session.setAttribute("failMsg", "userid not found");
 			return "redirect:/user/viewprofile";
 		}
 	}
@@ -434,7 +434,7 @@ public class HomeController {
 			return "ForgotPassword1";
 		}
 		else {
-			session.setAttribute("msg", "email and mobile number is incorrect");
+			session.setAttribute("failMsg", "email and mobile number is incorrect");
 			return "redirect:/forgotpassword";
 		}
 	}
@@ -447,21 +447,21 @@ public class HomeController {
 				user.setPassword(password);
 				User updatepassword = userService.addUser(user);
 				if (updatepassword!=null) {
-					session.setAttribute("msg", "user password successfully updated");
+					session.setAttribute("successMsg", "user password successfully updated");
 					return "redirect:/login"; 
 				}
 				else {
-					session.setAttribute("msg", "something went wrong on the server");
+					session.setAttribute("failMsg", "something went wrong on the server");
 					return "redirect:/login";
 				}
 			}
 			else {
-				session.setAttribute("msg", "something went wrong on the server");
+				session.setAttribute("successMsg", "something went wrong on the server");
 				return "redirect:/login";  
 			}
 		}
 		else {
-			session.setAttribute("msg", "new password and confirm password most be same");
+			session.setAttribute("failMsg", "new password and confirm password most be same");
 			return "ForgotPassword1";
 		}
 	}
