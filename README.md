@@ -176,19 +176,46 @@
 <h3 align="center">📸 Screenshots</h3>
 <p>Below are sample screenshots showcasing the ENotes Application:</p>
 <div>
-  <h4>1. User Registration Page</h4>
-  <img src="screenshots/registration.png" alt="User Registration Page" width="80%">
-
-  <h4>2. Notes Dashboard</h4>
-  <img src="screenshots/notes-dashboard.png" alt="Notes Dashboard" width="80%">
-
-  <h4>3. Task Management Interface</h4>
-  <img src="screenshots/task-management.png" alt="Task Management Interface" width="80%">
-
-  <h4>4. Profile Management</h4>
-  <img src="screenshots/profile-management.png" alt="Profile Management Page" width="80%">
-</div>
-
+  <h4>1. Index Page</h4>
+  <img src="index.png" alt="Index Page" width="80%">
+  <h4>2. Registration Page</h4>
+  <img src="registration.png" alt="User Registration Page" width="80%">
+   <h4>3. Login Page</h4>
+  <img src="login.png" alt="User Login Page" width="80%">
+   <h4>4. Forgot Password Page</h4>
+  <img src="forgotpassword.png" alt="Forgot Password Page" Page" width="80%">
+   <h4>5. Reset Password Page</h4>
+  <img src="forgotpassword1.png" alt="Reset Password Page" width="80%">
+   <h4>6. Home Page</h4>
+  <img src="home.png" alt="Home Page" width="80%">
+   <h4>7. Add Notes Page</h4>
+  <img src="addnotes.png" alt="Add Notes Page" width="80%">
+   <h4>8. View Notes Page</h4>
+  <img src="displaynotes.png" alt="Display Notes Page" width="80%">
+   <h4>9. Read Notes Page</h4>
+  <img src="readnotes.png" alt="Read Notes Page" width="80%">
+   <h4>10. Edit Notes Page</h4>
+  <img src="updatenotes.png" alt="Edit Notes Page" width="80%">
+   <h4>11. Remove Notes Page</h4>
+  <img src="removenotes.png" alt="Remove Notes Page" width="80%">
+   <h4>12. Add Task Page</h4>
+  <img src="addtodo.png" alt="Add Task Page" width="80%">
+  <h4>13. View Tasks Page</h4>
+  <img src="displaytodos.png" alt="Display All Tasks" width="80%">
+   <h4>14. Read Task Page</h4>
+  <img src="readtodo.png" alt="Read Task Page" width="80%">
+   <h4>15. Update Task Page</h4>
+  <img src="updatetodo.png" alt="Update Task Page" width="80%">
+   <h4>16. Remove Task Page</h4>
+  <img src="removetodo.png" alt="Remove Task Page" width="80%">
+   <h4>17. View Profile Page</h4>
+  <img src="viewprofile.png" alt="view Profile Page" width="80%">
+   <h4>18. Update Profile Page</h4>
+  <img src="updateprofile.png" alt="Update Profile Page" width="80%">
+   <h4>19. Delete Account Page</h4>
+  <img src="deleteaccount.png" alt="Delete Task Page" width="80%">
+   <h4>20. Logout Page</h4>
+  <img src="logout.png" alt="Logout Page" width="80%">
 <hr>
 
 <h3 align="center">😊 Enjoy Using ENotes Application!</h3>
